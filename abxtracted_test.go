@@ -1,9 +1,8 @@
-package abxtracted_test
+package abxtracted
 
 import (
 	"testing"
 
-	abxtracted "github.com/abxtracted/go-abxtracted"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -14,14 +13,14 @@ const (
 
 func TestNewClient(t *testing.T) {
 	var assert = assert.New(t)
-	var abx, err = abxtracted.New()
+	var abx, err = New()
 	assert.NoError(err)
 	assert.NotNil(abx)
 }
 
 func TestGetExperiment(t *testing.T) {
 	var assert = assert.New(t)
-	var abx, _ = abxtracted.New()
+	var abx, _ = New()
 	var customer = "TestGetExperiment"
 	exp, err := abx.Get(testProject, customer, testExperiment)
 	assert.NoError(err)
@@ -31,16 +30,16 @@ func TestGetExperiment(t *testing.T) {
 
 func TestGetInvalidExperiment(t *testing.T) {
 	var assert = assert.New(t)
-	var abx, _ = abxtracted.New()
+	var abx, _ = New()
 	var customer = "TestGetInvalidExperiment"
 	exp, err := abx.Get(testProject, customer, "invalid-exp")
 	assert.Error(err)
-	assert.Equal(abxtracted.Experiment{}, exp)
+	assert.Equal(Experiment{}, exp)
 }
 
 func TestCompleteExperiment(t *testing.T) {
 	var assert = assert.New(t)
-	var abx, _ = abxtracted.New()
+	var abx, _ = New()
 	var customer = "TestCompleteExperiment"
 	exp, err := abx.Get(testProject, customer, testExperiment)
 	assert.NoError(err)
@@ -50,7 +49,7 @@ func TestCompleteExperiment(t *testing.T) {
 func TestCompletedExperiment(t *testing.T) {
 	var assert = assert.New(t)
 	const experiment = "complete_integration_test"
-	var abx, _ = abxtracted.New()
+	var abx, _ = New()
 	var customer = "TestCompletedExperiment"
 	exp, err := abx.Get(testProject, customer, experiment)
 	assert.NoError(err)
